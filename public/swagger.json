@@ -1,0 +1,239 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Email Scheduler App API",
+    "description": "API documentation for Email Scheduler App"
+  },
+  "paths": {
+    "/save_emails": {
+      "post": {
+        "tags": ["Emails"],
+        "summary": "Save emails",
+        "description": "Endpoint to save emails.",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "formData",
+            "type": "integer",
+            "description": "ID of the event.",
+            "dafault": 123
+          },
+          {
+            "name": "email_subject",
+            "in": "formData",
+            "type": "string",
+            "description": "Subject of the email.",
+            "dafault": "Example Subject"
+          },
+          {
+            "name": "email_content",
+            "in": "formData",
+            "type": "string",
+            "description": "Body of the email.",
+            "dafault": "Example Body"
+          },
+          {
+            "name": "timestamp",
+            "in": "formData",
+            "type": "string",
+            "description": "Date and time of which the email should be sent (format: 'YYYY-MM-DD HH:MM:SS').",
+            "dafault": "2023-07-31 15:30:00"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Emails saved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "event_id": {
+                      "type": "integer",
+                      "example": 123
+                    },
+                    "email_subject": {
+                      "type": "string",
+                      "example": "Example Subject"
+                    },
+                    "email_content": {
+                      "type": "string",
+                      "example": "Example Body"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "example": "2023-07-31 15:30:00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Emails"],
+        "summary": "Get all emails",
+        "description": "Endpoint to get all emails with pagination.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "Page number.",
+            "default": 1
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "type": "integer",
+            "description": "Number of emails per page.",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "emails": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "event_id": {
+                        "type": "integer",
+                        "example": 123
+                      },
+                      "email_subject": {
+                        "type": "string",
+                        "example": "Example Subject"
+                      },
+                      "email_content": {
+                        "type": "string",
+                        "example": "Example Body"
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "example": "2023-07-31 15:30:00"
+                      }
+                    }
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "total_emails": {
+                      "type": "integer",
+                      "example": 20
+                    },
+                    "total_pages": {
+                      "type": "integer",
+                      "example": 2
+                    },
+                    "current_page": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "emails_per_page": {
+                      "type": "integer",
+                      "example": 10
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/save_emails/{email_id}": {
+      "get": {
+        "tags": ["Emails"],
+        "summary": "Get email by ID",
+        "description": "Endpoint to get an email by ID.",
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "path",
+            "type": "integer",
+            "default": 1,
+            "description": "ID of the email."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "event_id": {
+                  "type": "integer",
+                  "example": 123
+                },
+                "email_subject": {
+                  "type": "string",
+                  "example": "Example Subject"
+                },
+                "email_content": {
+                  "type": "string",
+                  "example": "Example Body"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "example": "2023-07-31 15:30:00"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Emails"],
+        "summary": "Delete email",
+        "description": "Endpoint to delete an email by ID.",
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "path",
+            "type": "integer",
+            "default": 1,
+            "description": "ID of the email."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Email with ID 1 deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

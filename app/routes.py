@@ -10,7 +10,7 @@ def save_emails():
 
     return jsonify({'message': 'Emails saved successfully', data: response}), 201
 
-@bp.route('/emails', methods=['GET'])
+@bp.route('/save_emails', methods=['GET'])
 def get_all_emails():
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 10))
@@ -18,13 +18,13 @@ def get_all_emails():
 
     return jsonify(response)
 
-@bp.route('/emails/<int:email_id>', methods=['GET'])
+@bp.route('/save_emails/<int:email_id>', methods=['GET'])
 def get_email_by_id(email_id):
     response = get_by_id(email_id)
 
     return jsonify(response)
 
-@bp.route('/emails/<int:email_id>', methods=['DELETE'])
+@bp.route('/save_emails/<int:email_id>', methods=['DELETE'])
 def delete_email(email_id):
     delete(email_id)
 

@@ -1,18 +1,37 @@
-# app.py
 from flask import Flask
+from flask_migrate import Migrate
 from app.routes import bp as app_bp
 from database import db
+from flask_swagger_ui import get_swaggerui_blueprint
 
-app = Flask(__name__)
+SWAGGER_URL = '/api-docs'
+API_URL = '/swagger.json'
 
-# Load configuration settings from config.py
-app.config.from_object('config.Config')
+def create_app():
+    app = Flask(
+        __name__,
+        static_url_path='', 
+        static_folder='public'
+    )
 
-# Register the app's blueprints
-app.register_blueprint(app_bp)
+    app.config.from_object('config.Config')
+    app.register_blueprint(app_bp)
+
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL,
+        API_URL,
+        config={
+            'app_name': "Email Scheduler App | API Documentation"
+        }
+    )
+
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+    
+    db.init_app(app)
+    migrate = Migrate(app, db)
+
+    return app
 
 if __name__ == '__main__':
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
+    app = create_app()
     app.run(debug=True)
