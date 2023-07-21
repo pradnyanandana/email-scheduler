@@ -1,0 +1,8 @@
+Flask==2.1.0
+Flask-RESTx==0.5.1
+Flask-SQLAlchemy==2.5.0
+Flask-Celery-Helper==1.0.0
+redis==3.5.3
+celery==5.2.2
+python-dotenv==0.19.1
+pymysql==1.0.2

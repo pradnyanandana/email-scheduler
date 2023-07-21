@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+      - mysql
+
+  redis:
+    image: "redis:6.2"
+
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+
+  worker:
+    build: .
+    command: celery -A app.celery worker --loglevel=info
+    depends_on:
+      - redis
+    environment:
+      BROKER_URL: ${BROKER_URL}
+      RESULT_BACKEND: ${RESULT_BACKEND}
+      TIMEZONE: ${TIMEZONE}
+      TASK_SERIALIZER: ${TASK_SERIALIZER}
+      RESULT_SERIALIZER: ${RESULT_SERIALIZER}
+      ACCEPT_CONTENT: ${ACCEPT_CONTENT}
