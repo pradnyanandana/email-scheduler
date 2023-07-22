@@ -4,8 +4,6 @@ import math
 
 from flask import abort
 from dotenv import load_dotenv
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.text import MIMEText
 from database.models import Email
 from database import session as db
 from datetime import datetime
@@ -19,28 +17,7 @@ def convert_tz(dt):
 
 @celery.task
 def send(event_id, email_subject, email_content):
-    # smtp_host = 'smtp.example.com'
-    # smtp_port = 587
-    # smtp_username = 'your_smtp_username'
-    # smtp_password = 'your_smtp_password'
-    # sender_email = 'sender@example.com'
-    # recipient_email = 'recipient@example.com'
-
-    # msg = MIMEMultipart()
-    # msg['From'] = sender_email
-    # msg['To'] = recipient_email
-    # msg['Subject'] = email_subject
-
-    # msg.attach(MIMEText(email_content, 'plain'))
-
-    # try:
-    #     with smtplib.SMTP(smtp_host, smtp_port) as server:
-    #         server.starttls()
-    #         server.login(smtp_username, smtp_password)
-    #         server.sendmail(sender_email, recipient_email, msg.as_string())
-    #         print("Email sent successfully.")
-    # except Exception as e:
-    #     print(f"Failed to send email: {e}")
+    # Send Email
     print(f"Send email, Event ID {event_id}, Subject: {email_subject}, Content: {email_content}, Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 def save(data):
