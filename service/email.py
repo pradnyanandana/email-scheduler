@@ -18,7 +18,7 @@ def convert_tz(dt):
     return timezone.localize(dt)
 
 @celery.task
-def send(event_id, email_subject, email_content, timestamp):
+def send(event_id, email_subject, email_content):
     # smtp_host = 'smtp.example.com'
     # smtp_port = 587
     # smtp_username = 'your_smtp_username'
@@ -41,7 +41,7 @@ def send(event_id, email_subject, email_content, timestamp):
     #         print("Email sent successfully.")
     # except Exception as e:
     #     print(f"Failed to send email: {e}")
-    print('send email')
+    print(f"Send email, Event ID {event_id}, Subject: {email_subject}, Content: {email_content}, Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 def save(data):
     event_id = data['event_id']
@@ -62,7 +62,8 @@ def save(data):
     db.add(email)
     db.commit()
 
-    # send.apply_async(args=[event_id, email_subject, email_content], eta=convert_tz(timestamp))
+    print(convert_tz(timestamp))
+    send.apply_async(args=[event_id, email_subject, email_content], eta=convert_tz(timestamp))
 
     return {
         'id': email.id,
