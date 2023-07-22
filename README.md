@@ -75,7 +75,11 @@ To schedule an email, make a `POST` request to the `/save_emails` endpoint with 
   "event_id": 1,
   "email_subject": "Email Subject",
   "email_content": "Email Body",
-  "timestamp": "2023-12-15 23:12"
+  "timestamp": "2023-12-15 23:12",
+  "recipients": [
+    "recipient1@example.com",
+    "recipient2@example.com"
+  ]
 }
 ```
 
