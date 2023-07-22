@@ -86,3 +86,11 @@ To view all scheduled emails, make a `GET` request to the `/save_emails` endpoin
 To get a specific scheduled email by ID, make a `GET` request to the `/save_emails/<email_id>` endpoint.
 
 To delete a scheduled email by ID, make a `DELETE` request to the `/save_emails/<email_id>` endpoint.
+
+## Testing
+
+To run the unit tests, use the following command:
+
+```bash
+pytest
+```
