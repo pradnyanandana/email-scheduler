@@ -13,32 +13,33 @@
         "description": "Endpoint to save emails.",
         "parameters": [
           {
-            "name": "event_id",
-            "in": "formData",
-            "type": "integer",
-            "description": "ID of the event.",
-            "dafault": 123
-          },
-          {
-            "name": "email_subject",
-            "in": "formData",
-            "type": "string",
-            "description": "Subject of the email.",
-            "dafault": "Example Subject"
-          },
-          {
-            "name": "email_content",
-            "in": "formData",
-            "type": "string",
-            "description": "Body of the email.",
-            "dafault": "Example Body"
-          },
-          {
-            "name": "timestamp",
-            "in": "formData",
-            "type": "string",
-            "description": "Date and time of which the email should be sent (format: 'YYYY-MM-DD HH:MM:SS').",
-            "dafault": "2023-07-31 15:30:00"
+            "name": "request_body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "integer",
+                  "description": "ID of the event.",
+                  "example": 123
+                },
+                "email_subject": {
+                  "type": "string",
+                  "description": "Subject of the email.",
+                  "example": "Example Subject"
+                },
+                "email_content": {
+                  "type": "string",
+                  "description": "Body of the email.",
+                  "example": "Example Body"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "Date and time of which the email should be sent (format: 'YYYY-MM-DD HH:MM:SS').",
+                  "example": "2023-07-31 15:30:00"
+                }
+              }
+            }
           }
         ],
         "responses": {

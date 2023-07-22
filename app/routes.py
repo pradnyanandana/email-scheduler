@@ -8,7 +8,7 @@ def save_emails():
     data = request.get_json()
     response = save(data)
 
-    return jsonify({'message': 'Emails saved successfully', data: response}), 201
+    return jsonify({'message': 'Emails saved successfully', 'data': response}), 201
 
 @bp.route('/save_emails', methods=['GET'])
 def get_all_emails():
