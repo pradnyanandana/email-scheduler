@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from service.email import save, get_all, get_by_id, delete
+from service.email import save, get_all, get_by_id
 
 bp = Blueprint('app', __name__)
 
@@ -23,9 +23,6 @@ def get_email_by_id(email_id):
     response = get_by_id(email_id)
 
     return jsonify(response)
-
-@bp.route('/save_emails/<int:email_id>', methods=['DELETE'])
-def delete_email(email_id):
     delete(email_id)
 
     return jsonify({'message': f'Email with ID {email_id} deleted successfully'})

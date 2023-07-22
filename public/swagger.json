@@ -37,6 +37,14 @@
                   "type": "string",
                   "description": "Date and time of which the email should be sent (format: 'YYYY-MM-DD HH:MM:SS').",
                   "example": "2023-07-31 15:30:00"
+                },
+                "recipients": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "List of recipient email addresses.",
+                  "example": ["recipient1@example.com", "recipient2@example.com"]
                 }
               }
             }
@@ -201,34 +209,6 @@
                 "timestamp": {
                   "type": "string",
                   "example": "2023-07-31 15:30:00"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Emails"],
-        "summary": "Delete email",
-        "description": "Endpoint to delete an email by ID.",
-        "parameters": [
-          {
-            "name": "email_id",
-            "in": "path",
-            "type": "integer",
-            "default": 1,
-            "description": "ID of the email."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Email with ID 1 deleted successfully"
                 }
               }
             }
